@@ -2,10 +2,11 @@ import strawberry, strawberry.tools as strawberry_tools
 
 from fastapi import FastAPI
 from strawberry.fastapi import GraphQLRouter
-import asyncio
+import asyncio, os
 
 from .gql.resolvers.QuestionResolver import QuestionResolver
 from .discord_bot import discord_bot
+from dotenv import load_dotenv
 
 @strawberry.type
 class HelloQuery:
@@ -26,6 +27,7 @@ def mount_schema():
     }
 
 def app() -> FastAPI:
+    load_dotenv()
     unified_schema = mount_schema()
     schema = strawberry.Schema(query=unified_schema['query'], mutation=unified_schema['mutation'])
     graphql_app = GraphQLRouter(schema)
@@ -34,6 +36,6 @@ def app() -> FastAPI:
 
     @fastapi_app.on_event("startup")
     async def startup_event():
-        asyncio.create_task(discord_bot.start("MTA1MzczNzI3MTE3NTY4NDE0Nw.GEq49Z.dOR7TO-dtTI9frXi9aQYCqoK0j_smqLWgRrZTM"))
+        asyncio.create_task(discord_bot.start(os.getenv("DISCORD_BOT_TOKEN") or ''))
 
     return fastapi_app
