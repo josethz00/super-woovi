@@ -1,6 +1,7 @@
 from motor.motor_asyncio import AsyncIOMotorClient
+import os
 
-MONGO_DETAILS = "mongodb://superwoovi:superwoovi@localhost:27017/superwoovi?authSource=admin"
+MONGO_DETAILS = os.getenv("MONGODB_URI")
 
 client = AsyncIOMotorClient(MONGO_DETAILS)
 db = client.superwoovi
