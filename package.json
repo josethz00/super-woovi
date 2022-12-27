@@ -10,7 +10,7 @@
   "scripts": {
     "start:dev": "concurrently \"yarn web\" \"yarn server\"",
     "web": "cd web && yarn dev",
-    "server": "uvicorn server:app --reload",
+    "server": "uvicorn server:app --port 7100 --reload",
     "install:web": "cd web && yarn install",
     "install:server": "pip install -r requirements.txt",
     "add:web": "cd web && yarn add"

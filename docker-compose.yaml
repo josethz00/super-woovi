@@ -1,28 +1,25 @@
 version: '3'
 services:
-  influxdb:
-    container_name: influxdb-container
-    image: influxdb:2.6-alpine
+  mongodb_superwoovi:
+    image: mongo:4.4.6
+    container_name: mongodb_superwoovi
     ports:
-      - '8086:8086'
-    networks:
-      - influx_mqtt_network
+      - 27017:27017
     environment:
-      - INFLUXDB_DB=superwoovi
-      - INFLUXDB_USER=superwoovi
-      - INFLUXDB_USER_PASSWORD=superwoovi
-      - INFLUXDB_ADMIN_ENABLED=true
-      - INFLUXDB_ADMIN_USER=admin
-      - INFLUXDB_ADMIN_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=superwoovi
+      - MONGO_INITDB_ROOT_USERNAME=superwoovi
+      - MONGO_INITDB_ROOT_PASSWORD=superwoovi
+    networks:
+      - superwoovi_network
   mqtt:
-      container_name: mqtt-container
-      image: eclipse-mosquitto:1.6
-      restart: always
-      ports:
-        - 1883:1883
-      networks:
-        - influx_mqtt_network
+    container_name: mqtt-container
+    image: eclipse-mosquitto:1.6
+    restart: always
+    ports:
+      - 1883:1883
+    networks:
+      - superwoovi_network
 
 networks:
-  influx_mqtt_network:
+  superwoovi_network:
     driver: bridge
