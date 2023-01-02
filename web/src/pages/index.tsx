@@ -154,7 +154,7 @@ const Home: NextPage = (): JSX.Element => {
 				</div>
 			</nav>
 
-			<div className="container relative mx-auto mt-32 grid grid-cols-3 gap-4">
+			<div className="container fixed mx-auto mt-32 grid h-screen grid-cols-3 gap-4">
 				<div className="flex min-h-screen justify-center">
 					<div className="container flex flex-col gap-12 px-4">
 						<p className="ml-4 text-lg font-bold uppercase tracking-tight text-gray-300">
@@ -177,12 +177,16 @@ const Home: NextPage = (): JSX.Element => {
 					</div>
 				</div>
 
-				<div className="min-h-screen">
-					<div className="container flex w-full flex-col items-center gap-12">
-						<div className="flex h-48 w-full flex-col gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
-						<div className="flex h-48 w-full flex-col gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
-						<div className="flex h-48 w-full flex-col gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
-					</div>
+				<div className="custom-scrollbar-w custom-scrollbar-tr custom-scrollbar-hov custom-scrollbar-handle [&>*]:last-child:mb-0 h-screen w-full overflow-y-scroll pr-6 pb-32 [&>*]:mb-7">
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
+					<div className="h-48 w-full gap-4 rounded-md bg-white/10 p-4 text-white hover:bg-white/20"></div>
 				</div>
 
 				<div className="flex min-h-screen justify-center">
@@ -205,26 +209,3 @@ const Home: NextPage = (): JSX.Element => {
 };
 
 export default Home;
-
-/**
- * Simple component to show the current session and sign in/out
- * @returns {JSX.Element}
- */
-const AuthShowcase: React.FC = (): JSX.Element => {
-	const { data: sessionData } = useSession();
-
-	return (
-		<div className="flex flex-col items-center justify-center gap-4">
-			<p className="text-center text-2xl text-white">
-				{sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-				{!sessionData && <span>Not logged in</span>}
-			</p>
-			<button
-				className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-				onClick={sessionData ? () => signOut() : () => signIn()}
-			>
-				{sessionData ? 'Sign out' : 'Sign in'}
-			</button>
-		</div>
-	);
-};
