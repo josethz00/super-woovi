@@ -13,7 +13,9 @@ export default function App({
 }: AppProps): JSX.Element {
 	return (
 		<SessionProvider session={session}>
-			<Component {...pageProps} />
+			<main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#0d1b2a] to-[#1b263b]">
+				<Component {...pageProps} />
+			</main>
 		</SessionProvider>
 	);
 }
