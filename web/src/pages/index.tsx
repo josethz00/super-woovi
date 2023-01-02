@@ -5,7 +5,13 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { FaBars, FaDiscord, FaHome, FaSearch } from 'react-icons/fa';
+import {
+	FaBars,
+	FaDiscord,
+	FaHome,
+	FaQuestion,
+	FaSearch,
+} from 'react-icons/fa';
 import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
 import {
@@ -180,55 +186,17 @@ const Home: NextPage = (): JSX.Element => {
 				</div>
 
 				<div className="flex min-h-screen justify-center">
-					<div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-						<h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-							Super <span className="text-[hsl(577,100%,70%)]">Woovi</span> App
-						</h1>
-						<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-							<Link
-								className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-								href="new-group"
-								onClick={(e) => {
-									e.preventDefault();
-									if (!sessionData) {
-										alert('You need to be logged in to create a group');
-										return;
-									} else {
-										router.push('new-group');
-									}
+					<div className="container flex flex-col gap-12 px-4">
+						<ul className="flex flex-col gap-4">
+							<button
+								className="ml-4 flex items-center justify-center rounded-xl bg-[hsl(577,100%,70%)] py-2 px-6 text-xs font-bold text-white hover:opacity-75"
+								onClick={() => {
+									return;
 								}}
 							>
-								<h3 className="text-2xl font-bold">Create group →</h3>
-								<div className="text-lg">
-									Create your Secret Santa Group - Enjoy the holidays by
-									creating a group to do the Secret Santa with your friends and
-									family.
-								</div>
-							</Link>
-							<Link
-								className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-								href="my-groups"
-								onClick={(e) => {
-									e.preventDefault();
-									if (!sessionData) {
-										alert('You need to be logged in to create a group');
-										return;
-									} else {
-										router.push('my-groups');
-									}
-								}}
-							>
-								<h3 className="text-2xl font-bold">My Secret Santas →</h3>
-								<div className="text-lg">
-									View your Secret Santas - View your Secret Santas and see who
-									you are giving a gift to and who is giving you a gift
-									(secret).
-								</div>
-							</Link>
-						</div>
-						<div className="flex flex-col items-center gap-2">
-							<AuthShowcase />
-						</div>
+								Ask a question <FaQuestion className="ml-2 text-lg" />
+							</button>
+						</ul>
 					</div>
 				</div>
 			</div>
